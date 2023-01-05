@@ -1,22 +1,24 @@
-// const team = ['Messi', 'Ronaldo', 'Mpabe','Messi', 'Minama', 'Robeto'];
+const gameEvents = new Map([
+    [17, 'GOAL'],
+    [36, 'SUBTITUTION'],
+    [47, 'GOAL'],
+    [61, 'YELLOW CARD'],
+    [64, 'RED CARD'],
+    [69, 'SUBTITUTION'],
+    [70, 'GOAL'],
+    [80, 'GOAL'],
+    [91, 'GOAL'],
+]
+);
 
-// const players=new Set(team);
-// players.add('hoài Nam');
-// players.delete('Minama');
-// const newTeam=[...players];
-// console.log(newTeam[0]);
-// for(const player in players){
-//     console.log(player);
-// }
-const rest=new Map();
-rest.set('name','Hoài Nam')
-.set('name','messi')
-.set('open',8)
-.set('close',12)
-.set(true,'i love you')
-.set(false,'i dont love you');
-const time=7.8;
-console.log(rest.get(time>=rest.get('open') && time<=rest.get('close')));
-console.log(rest.has('messi'));
-rest.delete('name')
-console.log(rest['name'])
+// 1. Events 
+const events=new Set();
+// console.log(gameEvents);
+const newArray=[...new Set(gameEvents)];
+for(const [key,value] of gameEvents){
+    events.add(value);
+}
+console.log(`Check from minutes 64 :${ gameEvents.has(64)}`);
+gameEvents.delete(64);
+// console.log(gameEvents);
+console.log('An event ')
