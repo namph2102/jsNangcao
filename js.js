@@ -1,28 +1,26 @@
-const gameEvents = new Map([
-    [17, '⚽ GOAL'],
-    [36, 'SUBTITUTION'],
-    [47, '⚽ GOAL'],
-    [61, 'SUBTITUTION'],
-    [64, 'YELLOW CARD'],
-    [69, 'RED CARD'],
-    [70, 'SUBTITUTION'],
-    [72, '⚽ GOAL'],
-    [76, 'SUBTITUTION'],
-    [80, '⚽ GOAL'],
-    [90, 'YELLOW CARD'],   
-]
-);
-// 1. tạo mảng
-const newArray=[...new Set(gameEvents.values())];
-console.log(newArray);
-//2. 
-gameEvents.delete(64);
-//3.
-const time=[...new Set(gameEvents.keys())][gameEvents.size-1]
-console.log(`"1 sự kiện xảy ra, trung bình mỗi ${(time/gameEvents.size).toFixed(2)} phút`);
 
-//4. 
-
-for(const [key,value] of gameEvents){
-    console.log(`[ ${ key <= 45 && 'FIRST' || 'SECOND'} HALF] ${key}: ${value}]`)
+const coverCameCase=(underscore='ten_bien')=>{
+    const camelCase=underscore.trim().toLowerCase().split('_');
+    for(let i=1;i<camelCase.length;i++) {
+        //  camelCase[i]=camelCase[i][0].toUpperCase()+camelCase[i].slice(1);// C1;
+         camelCase[i]= camelCase[i].replace(camelCase[i][0],camelCase[i][0].toUpperCase()) // c2;
+    }
+  return camelCase.join('');
 }
+
+
+console.log(coverCameCase('calculate_AGE'));
+console.log(coverCameCase('underscore_Case'));
+console.log(coverCameCase('first_name'));
+console.log(coverCameCase('Some_Variable'));
+console.log(coverCameCase('delayed_departure'));
+console.log(coverCameCase('handle_scope_array'));
+
+
+const flights =`_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao937661
+09;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis
+2323639855;12:30`;
+
+console.log(flights.split('+'));
+
+
