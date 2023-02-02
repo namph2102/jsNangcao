@@ -1,13 +1,50 @@
-.chapper{
-    background-color: #ccc;
-    height: 300px;
+.balace__history{
+    padding: 12px 0;
+    background-color: rgb(243, 239, 232);
     overflow: auto;
-
-    margin-top: 50px;
 }
-h2{
-    background-color: orange;
-    position: sticky;
-    top: 0;
-    text-transform: capitalize;
+.balance__box--item {
+    background-color: rgb(248, 249, 250);
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    border: 1px solid rgb(235, 224, 224);
+    border-radius: 12px;
+    color: #080808;
+
+}
+
+.balance__box--item__type {
+    padding: 4px 12px;
+    border-radius: 16px;
+    color: white;
+}
+
+.balance__box--item__type.desposit {
+    background-color: green;
+}
+
+.balance__box--item__type.drawal {
+    background-color: rgb(92, 2, 69);
+}
+.balance__box--item__cost{
+    font-size: 16px;
+    letter-spacing: 1.6px;
+    font-weight: 600;
+}
+.balace__container {
+    border-radius: 16px;
+    padding:20px 40px;
+}
+
+.balace__container input {
+    width: 90%;
+}
+
+.balace__body {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
 }
