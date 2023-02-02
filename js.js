@@ -45,17 +45,7 @@
 // curentSet.forEach((value,key)=>{
 //     console.log(`${key} : ${value}`);
 // })
-const dogJulia= [3, 5, 2, 12, 7];
-const dogKate= [4, 1, 15, 8, 3];
-const checkDogs=(listDogA,listDogB)=>{
-    const arrCat=[listDogA.splice(2,1),listDogB.splice(2,1)];
-    const arrDog=[...listDogA,...listDogB];
-    console.log(arrCat);
-    console.log(arrDog);
-}
-checkDogs(dogJulia,dogKate);
-const checkAges=(listAge)=>{
-    for(const age of listAge){
-        
-    }
-}
+
+
+const numbers=[1,2,3,5,4,8];
+console.log(numbers.map(number=>number*3));
