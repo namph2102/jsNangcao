@@ -27,28 +27,28 @@
                 <i class="fa-brands fa-react"></i>
             </div>
             <div>
-                <input type="text" placeholder="USER" class="">
-                <input type="text" placeholder="PIN" class="">
-                <button><i class="fa-solid fa-right-from-bracket"></i></button>
+                <input type="text" placeholder="USER" id="username" class="">
+                <input type="text" placeholder="PIN" id="password" class="">
+                <button id="btn_login"><i class="fa-solid fa-right-from-bracket"></i></button>
             </div>
         </header>
-        <main>
+        <main class="app__body" style="opacity: 0;">
             <div class="row d-flex justify-content-between">
                 <div class="col-6">
                     <h2>Current balance</h2>
-                    <p>Ad of 2/2/2023</p>
+                    <p>Ad of <span><span class="day__now">2/2/2023</span>,  <span class="time__now"></span></span></p>
                 </div>
 
                 <div class="col-6 ">
-                    <div class="text-end fs-2 fw-bold">000$</div>
+                    <div class="text-end fs-2 fw-bold" id="current_balance">000$</div>
                 </div>
             </div>
             <div class="body__container row">
                 <div class="col-7 balace__history">
                     <div class="balance__box">
                         <div class="balance__box--item">
-                            <div class="balance__box--item__type desposit">
-                                8 DESPOSIT
+                            <div class="balance__box--item__type ">
+                                <span class="desposit">8 DESPOSIT </span><span>20/13/2023</span>
                             </div>
                             <div class="balance__box--item__cost">
                                 1300
@@ -70,17 +70,18 @@
                         <h4 class="balace__title">Transfer Money</h4>
                         <div class="balace__body">
                             <div>
-                                <input type="text">
+                                <input id="transfer__account" type="text">
                                 <p>Transfer to</p>
                             </div>
                             <div>
-                                <input type="number" min="0">
+                                <input id="transfer__amount" type="number" min="0">
                                 <p>Amount</p>
                             </div>
                             <div>
-                                <button class="btn btn-light"><i class="fa-solid fa-right-to-bracket"></i></button>
+                                <button id="btn__transfer" class="btn btn-light"><i class="fa-solid fa-right-to-bracket"></i></button>
                             </div>
                         </div>
+                        <p class="m-0 p-0 text-danger text-center error__tranfor"></p>
                     </div>
                     <div class="balace__container bg-success" style="margin: 8px 0;">
                         <h4 class="balace__title">Request Loan</h4>
@@ -111,29 +112,30 @@
                     </div>
                 </div>
             </div>
+            <footer class="d-flex justify-content-between align-items-center m-2 fs-6">
+                <div class="d-flex">
+                    <div>
+                        <p>IN <span class="fs-4 text-success money__in">50 $</span></p>
+                    </div>
+                    <div style="margin: 0 8px;">
+                        <p>OUT <span class="fs-4 text-danger money__out">50 $</span></p>
+                    </div>
+                    <div>
+                        <p>INTEREST <span class="fs-4 text-success money__interest">50 $</span></p>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn btn__sort">
+                        <i class="fa-solid fa-download"></i> Sort
+                    </button>
+                </div>
+                <div>
+                    <p>You will logged out in <span class="timelogin">05:00</span></p>
+                </div>
+            </footer>
         </main>
 
-        <footer class="d-flex justify-content-between align-items-center m-2 fs-6">
-            <div class="d-flex">
-                <div>
-                    <p>IN <span class="fs-4 text-success money__in">50 $</span></p>
-                </div>
-                <div style="margin: 0 8px;">
-                    <p>OUT <span class="fs-4 text-danger money__out">50 $</span></p>
-                </div>
-                <div>
-                    <p>INTEREST <span class="fs-4 text-success money__interest">50 $</span></p>
-                </div>
-            </div>
-            <div>
-                <button class="btn">
-                    <i class="fa-solid fa-download"></i> Sort
-                </button>
-            </div>
-            <div>
-                <p>You will logged out in <span class="timelogin">05:00</span></p>
-            </div>
-        </footer>
+        
 
     </div>
 </body>

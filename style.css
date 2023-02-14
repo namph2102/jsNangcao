@@ -20,15 +20,24 @@
     padding: 4px 12px;
     border-radius: 16px;
     color: white;
+    text-transform: uppercase;
 }
 
-.balance__box--item__type.desposit {
+.balance__box--item__type .desposit {
     background-color: green;
+    padding: 2px 4px;
+    border-radius: 12px;
+}
+.balance__box--item__type :last-child{
+    color: black;
+    margin-left: 8px;
+}
+.balance__box--item__type .drawal {
+    background-color: rgb(92, 2, 69);
+    padding: 2px 4px;
+    border-radius: 12px;
 }
 
-.balance__box--item__type.drawal {
-    background-color: rgb(92, 2, 69);
-}
 .balance__box--item__cost{
     font-size: 16px;
     letter-spacing: 1.6px;
@@ -47,4 +56,7 @@
     display: flex;
     justify-content: space-between;
     text-align: center;
+}
+.app__body{
+    transition: 0.5s ease-in;
 }
