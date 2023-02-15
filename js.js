@@ -41,18 +41,34 @@ btnScrollTo.addEventListener('click',(e)=>{
 session1.scrollIntoView({behavior:'smooth'});
 //  window.scrollTo(0,boxs1.top+window.scrollY);
 })
-session1.addEventListener('mouseenter',()=>{
-  console.log('hey mouseenter');
-  console.log(this);
-})
+
 document.getElementsByClassName('.btn--scroll-to').onclick=()=>{
   console.log(this);
 }
-session1.addEventListener('mouseout',()=>{
-  console.log('hey mouseout');
+
+const randomColor=(min=0,max=255)=>Math.floor(Math.random()*(max-min)+1)+min;
+document.querySelectorAll('.nav__link')
+.forEach(link=>{
+  link.addEventListener('click',function(e){
+    e.preventDefault()
+    console.log(this);
+    console.log(document.querySelector(this.getAttribute('href')))
+    document.querySelector(this.getAttribute('href')).scrollIntoView();
+  })
 })
 
-  for(let elem of document.querySelectorAll('*')) {
-    elem.addEventListener("click", e => alert(`Capturing: ${elem.tagName}`), false);
-    // elem.addEventListener("click", e => alert(`Bubbling: ${elem.tagName}`));
-  }
+// tabbed compoment
+const tabs=document.querySelectorAll('.operations__tab');
+const tabContext=document.querySelectorAll('.operations__content ')
+const tabContent=document.querySelector('.operations__tab-container');
+
+tabContent.addEventListener('click',(e)=>{
+  const parentElement=e.target.closest('.operations__tab');
+  if(!parentElement) return ;
+  /// remove tabs adn tabcontent active
+  tabs.forEach(t=>t.classList.remove("operations__tab--active"))
+  tabContext.forEach(content=>content.classList.remove("operations__content--active"))
+
+   parentElement.classList.add('operations__tab--active');
+   document.querySelector(`.operations__content--${parentElement.dataset.tab}`).classList.add('operations__content--active')
+})
