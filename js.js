@@ -83,5 +83,18 @@ function handleOver(e){
     parentNav.querySelector('img').style.opacity = this;
   } 
 }
-document.querySelector('nav').addEventListener('mouseover',handleOver.bind(0.5))
-document.querySelector('nav').addEventListener('mouseout',handleOver.bind(1))
+const nav=document.querySelector('.header nav');
+nav.addEventListener('mouseover',handleOver.bind(0.5))
+nav.addEventListener('mouseout',handleOver.bind(1))
+// stick menu
+
+window.onscroll=()=>{
+ const box=document.querySelector('.header__title').getBoundingClientRect();
+
+ if(box.bottom<=0 && !nav.classList.contains('sticky')){
+  nav.classList.add('sticky');
+  
+ }else if((box.bottom>0 && nav.classList.contains('sticky'))){
+  nav.classList.remove('sticky');
+ }
+}
