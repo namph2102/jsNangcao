@@ -12,7 +12,7 @@
     />
     <link rel="stylesheet" href="style.css" />
     <title>Demo Nam Web</title>
-
+   
   </head>
   <body>
     <header class="header">
@@ -64,7 +64,7 @@
       </div>
     </header>
 
-    <section class="section" id="section--1">
+    <section class="section section--hidden" id="section--1">
       <div class="section__title">
         <h2 class="section__description">Features</h2>
         <h3 class="section__header">
@@ -135,7 +135,7 @@
       </div>
     </section>
 
-    <section class="section" id="section--2">
+    <section class="section section--hidden" id="section--2">
       <div class="section__title">
         <h2 class="section__description">Operations</h2>
         <h3 class="section__header">
@@ -213,7 +213,7 @@
       </div>
     </section>
 
-    <section class="section" id="section--3">
+    <section class="section section--hidden" id="section--3">
       <div class="section__title section__title--testimonials">
         <h2 class="section__description">Not sure yet?</h2>
         <h3 class="section__header">
@@ -222,8 +222,8 @@
       </div>
 
       <div class="slider">
-        <div class="slide slide--1">
-          <div class="testimonial">
+        <div class="slide" >
+                 <div class="testimonial">
             <h5 class="testimonial__header">Best financial decision ever!</h5>
             <blockquote class="testimonial__text">
               Lorem ipsum dolor sit, amet consectetur adipisicing elit.
@@ -241,7 +241,7 @@
           </div>
         </div>
 
-        <div class="slide slide--2">
+        <div class="slide" >
           <div class="testimonial">
             <h5 class="testimonial__header">
               The last step to becoming a complete minimalist
@@ -261,7 +261,7 @@
           </div>
         </div>
 
-        <div class="slide slide--3">
+        <div class="slide" >
           <div class="testimonial">
             <h5 class="testimonial__header">
               Finally free from old-school banks
@@ -283,13 +283,20 @@
         </div>
 
         <!-- We build this slider with images, but inside each slide, there can be ANY HTML, it doesn't have to be just an image! -->
-        <!-- <div class="slide"><img src="https://bankist-dom.netlify.app/img/img-1.jpg" alt="Photo 1" /></div>
+        <div class="slide"><img src="https://bankist-dom.netlify.app/img/img-1.jpg" alt="Photo 1" /></div>
         <div class="slide"><img src="https://bankist-dom.netlify.app/img/img-2.jpg" alt="Photo 2" /></div>
         <div class="slide"><img src="https://bankist-dom.netlify.app/img/img-3.jpg" alt="Photo 3" /></div>
-        <div class="slide"><img src="https://bankist-dom.netlify.app/img/img-4.jpg" alt="Photo 4" /></div> -->
+        <div class="slide"><img src="https://bankist-dom.netlify.app/img/img-4.jpg" alt="Photo 4" /></div>
         <button class="slider__btn slider__btn--left">&larr;</button>
         <button class="slider__btn slider__btn--right">&rarr;</button>
-        <div class="dots"></div>
+        <div class="dots">
+            <div class="dots__dot"></div>
+            <div class="dots__dot"></div>
+            <div class="dots__dot"></div>
+            <div class="dots__dot"></div>
+            <div class="dots__dot"></div>
+            <div class="dots__dot"></div>
+        </div>
       </div>
     </section>
 
@@ -359,5 +366,5 @@
     <div class="overlay hidden"></div>
 
   </body>
-  <script src="/js.js"></script>
+  <script  src="/js.js"></script>
 </html>
