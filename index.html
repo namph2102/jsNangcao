@@ -7,20 +7,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Document</title>
 </head>
+<style>
+  .country__flag {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .country {
+    width: max-content;
+    border: 1px solid rgb(129, 126, 126);
+    box-shadow: 1px 3px 2px rgb(218, 191, 191);
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .country__body {
+    padding-left: 20px;
+  }
+
+  .container {
+    position: relative;
+  }
+
+  .country__error {
+    position: fixed;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+</style>
 
 <body>
   <div class="container">
-    <h2 class="text-center">MY BOOK STORE</h2>
-    <div id="getContent" class="row">
-      <div class="col-lg-4 col-md-3 col-6">
-        <h2>Title</h2>
-        <figure>
-          <img src="" class="w-1000" alt="">
-          <figcaption class="fs-6">dsaasdasd</figcaption>
-        </figure>
-      </div>
+    <div class="row country__container">
+      <!-- <div class="col-6">
+        <div class="country">
+          <figure>
+            <img class="country__flag"
+              src="https://movibes.online/avata/6363e8ec5c38bdau-pha-thuong-khung-phan-5-gia-nam-hoc-vien-1321-300x450.jpg"
+              alt="">
+            <figcaption>
+              <h1 class="fs-4 m-0 ps-3 fw-bold">Mỹ</h1>
+            </figcaption>
+            <span class="ps-3 fs-6">EUROPE</span>
+          </figure>
+          <div class="country__body">
+            <div class="country__people">
+              <i class="fa-solid fa-person-rifle"></i> <span class="ms-2"> 81.2</span> people
+            </div>
+            <div class="country__name">
+              <i class="fa-solid fa-earth-asia"></i> <span class="ms-2">German </span>
+            </div>
+            <div class="country__localtion">
+              <i class="fa-solid fa-map-location-dot"></i> <span class="ms-2"> Euro</span>
+            </div>
+          </div>
+        </div>
+
+      </div> -->
+    
+    </div>
+    <div class="country__error text-center">
+      <div class="error text-center text-danger fs-6 fw-bold"></div>
+      <input id="latitude" placeholder="Nhập vĩ độ" type="text">
+      <input id="longitude" placeholder="Nhập kinh độ" type="text">
+      <br>
+      <button class="btn btn-danger btn__open--location mt-2">
+        Click me !
+      </button>
     </div>
   </div>
 </body>
