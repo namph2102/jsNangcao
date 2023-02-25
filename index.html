@@ -2,88 +2,110 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
-    integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/ishre-yash/ishre-yash/main/favicon.ico" />
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ishre-yash/ishre-yash/main/favicon-16x16.png" sizes="16x16" />
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ishre-yash/ishre-yash/main/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ishre-yash/ishre-yash/main/android-chrome-192x192.png" sizes="192x192" />
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ishre-yash/ishre-yash/main/android-chrome-512x512.png" sizes="512x512" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+  <script defer src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+
+  <script defer src="js.js"></script>
+  <title>Maply</title>
 </head>
-<style>
-  .country__flag {
-    width: 300px;
-    height: 200px;
-    object-fit: cover;
-  }
-
-  .country {
-    width: max-content;
-    border: 1px solid rgb(129, 126, 126);
-    box-shadow: 1px 3px 2px rgb(218, 191, 191);
-    font-size: 16px;
-    font-weight: 500;
-  }
-
-  .country__body {
-    padding-left: 20px;
-  }
-
-  .container {
-    position: relative;
-  }
-
-  .country__error {
-    position: fixed;
-    bottom: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-</style>
 
 <body>
-  <div class="container">
-    <div class="row country__container">
-      <!-- <div class="col-6">
-        <div class="country">
-          <figure>
-            <img class="country__flag"
-              src="https://movibes.online/avata/6363e8ec5c38bdau-pha-thuong-khung-phan-5-gia-nam-hoc-vien-1321-300x450.jpg"
-              alt="">
-            <figcaption>
-              <h1 class="fs-4 m-0 ps-3 fw-bold">Mỹ</h1>
-            </figcaption>
-            <span class="ps-3 fs-6">EUROPE</span>
-          </figure>
-          <div class="country__body">
-            <div class="country__people">
-              <i class="fa-solid fa-person-rifle"></i> <span class="ms-2"> 81.2</span> people
-            </div>
-            <div class="country__name">
-              <i class="fa-solid fa-earth-asia"></i> <span class="ms-2">German </span>
-            </div>
-            <div class="country__localtion">
-              <i class="fa-solid fa-map-location-dot"></i> <span class="ms-2"> Euro</span>
-            </div>
-          </div>
+  <div class="sidebar">
+    <img src="https://raw.githubusercontent.com/ishre-yash/ishre-yash/e309d4168af948ac5eeabf884f0ea1080425d97e/logoName.svg" alt="Logo" class="logo" />
+
+    <ul class="workouts">
+      <form class="form hidden">
+        <div class="form__row">
+          <label class="form__label">Type</label>
+          <select class="form__input form__input--type">
+            <option value="running">Running</option>
+            <option value="cycling">Cycling</option>
+          </select>
+        </div>
+        <div class="form__row">
+          <label class="form__label">Distance</label>
+          <input class="form__input form__input--distance" placeholder="km" />
+        </div>
+        <div class="form__row">
+          <label class="form__label">Duration</label>
+          <input class="form__input form__input--duration" placeholder="min" />
         </div>
 
-      </div> -->
-    
-    </div>
-    <div class="country__error text-center">
-      <div class="error text-center text-danger fs-6 fw-bold"></div>
-      <input id="latitude" placeholder="Nhập vĩ độ" type="text">
-      <input id="longitude" placeholder="Nhập kinh độ" type="text">
-      <br>
-      <button class="btn btn-danger btn__open--location mt-2">
-        Click me !
-      </button>
-    </div>
+        <div class="form__row">
+          <label class="form__label">Cadence</label>
+          <input class="form__input form__input--cadence" placeholder="step/min" />
+        </div>
+        <div class="form__row form__row--hidden">
+          <label class="form__label">Elev Gain</label>
+          <input class="form__input form__input--elevation" placeholder="meters" />
+        </div>
+        <button class="form__btn">OK</button>
+      </form>
+
+      <!-- <li class="workout workout--running" data-id="1234567890">
+          <h2 class="workout__title">Running on April 14</h2>
+          <div class="workout__details">
+            <span class="workout__icon">🏃‍♂️</span>
+            <span class="workout__value">5.2</span>
+            <span class="workout__unit">km</span>
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">⏱</span>
+            <span class="workout__value">24</span>
+            <span class="workout__unit">min</span>
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">⚡️</span>
+            <span class="workout__value">4.6</span>
+            <span class="workout__unit">min/km</span>
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">🦶🏼</span>
+            <span class="workout__value">178</span>
+            <span class="workout__unit">spm</span>
+          </div>
+        </li>
+
+        <li class="workout workout--cycling" data-id="1234567891">
+          <h2 class="workout__title">Cycling on April 5</h2>
+          <div class="workout__details">
+            <span class="workout__icon">🚴‍♀️</span>
+            <span class="workout__value">27</span>
+            <span class="workout__unit">km</span>
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">⏱</span>
+            <span class="workout__value">95</span>
+            <span class="workout__unit">min</span>
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">⚡️</span>
+            <span class="workout__value">16</span>
+            <span class="workout__unit">km/h</span>
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">⛰</span>
+            <span class="workout__value">223</span>
+            <span class="workout__unit">m</span>
+          </div>
+        </li> -->
+    </ul>
   </div>
+
+  <div id="map"></div>
 </body>
-<script src="./js.js"></script>
 
 </html>

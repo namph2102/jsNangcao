@@ -1,77 +1,70 @@
-const myKey = '397718554946363150544x124491';
-const getLocation = (latitude, longitude) => {
-    return fetch(`https://geocode.xyz/${latitude},${longitude}?geoit=json&auth=${myKey}`)
-        .then(res =>{
-           if(!res.ok){
-            throw new Error(`Some things wrong with status ${res.status}`)
-           }
-            return res.json()
-        })
-        .then((result)=>{
-            console.log(result);
-            if(!result.state ) {
-                alert('không tìm thấy !')
-                throw new Error('Can not find !');
-            }
-            renderLocation(result);   
-             console.log(`Well come to ${result.country} with city at "${result.city}"`);
-        })
-        .catch(err=>console.error(err.message))
+// APPLICATION ARCHITECTURE
+// const form = document.querySelector('.form');
+// const containerWorkouts = document.querySelector('.workouts');
+// const inputType = document.querySelector('.form__input--type');
+// const inputDistance = document.querySelector('.form__input--distance');
+// const inputDuration = document.querySelector('.form__input--duration');
+// const inputCadence = document.querySelector('.form__input--cadence');
+// const inputElevation = document.querySelector('.form__input--elevation');
+
+
+
+// const getMap=(position)=>{
+//   var map = L.map('map').setView(position, 13);
+
+// L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+// }).addTo(map);
+
+// map.on('click',function(e){
+//     const {lat,lng}= e.latlng;
+//     L.marker([lat,lng]).addTo(map)
+//     .bindPopup({
+//       maxWidth:400,
+//       minWidth:50,
+//       autoClose:false,
+//     })
+//     .setContent('Runing')
+//     .openPopup();
+// })
+
+// }
+
+// navigator.geolocation.getCurrentPosition(function (map) {
+//   const { latitude: lat, longitude: log } = map.coords;
+//   getMap([lat, log]);
+//   console.log(`https://www.google.com/maps/@${lat},${log}`);
+// }, function (err) {
+//   console.error(err.message);
+// });
+
+class SV {
+  constructor(mssv, tensv, diem) {
+    this.mssv = mssv;
+    this.ensv = tensv;
+    this.diem = diem;
+  }
+ 
+  xuat() {
+    console.log(`MSSV ${this.mssv} -- Tên Sinh Viên ${this.tensv}-- Điểm  ${this.diem}`);
+  }
 }
- const  renderLocation = (country) => {
-    const html = ` <div class="col-4">
-    <div class="country">
-      <figure>
-        <img class="country__flag"
-          src="https://movibes.online/avata/6363e8ec5c38bdau-pha-thuong-khung-phan-5-gia-nam-hoc-vien-1321-300x450.jpg"
-          alt="">
-        <figcaption><h1 class="fs-4 m-0 ps-3 fw-bold" >${country.state}</h1></figcaption>
-        <span class="ps-3 fs-6">${country.country}</span>
-      </figure>
-      <div class="country__body">
-        <div class="country__people">
-          <i class="fa-solid fa-person-rifle"></i> <span class="ms-2"> ${(country.geonumber/1_000_000).toFixed(1)}</span> people
-        </div>
-        <div class="country__name">
-          <i class="fa-solid fa-earth-asia"></i> <span class="ms-2">${country.city} </span> 
-        </div>
-        <div class="country__localtion">
-          <i class="fa-solid fa-map-location-dot"></i> <span class="ms-2"> ${country.state}</span> 
-        </div>
-      </div>
-    </div>
+const nam = new SV('PS21235', 'Phạm Hoài Nam', 9.9);
 
-  </div>`;
-  document.querySelector('.country__container').insertAdjacentHTML('beforeend',html);
-}
-const container__error=document.querySelector('.error')
-const latitude=document.querySelector('#latitude');
-const longitude=document.querySelector('#longitude');
-console.log(latitude,longitude);
-let message='';
-document.querySelector('.btn__open--location').addEventListener('click', ()=>{
-    if(!latitude.value || !longitude.value){
-        message='Điền đẩy đủ thông tin'
-        container__error.textContent=message
-        throw new Error(message)
-    }
-    getLocation(latitude.value, longitude.value)
 
-  
-})
-
-getLocation(52.508, 13.381)
-getLocation(19.037, 72.873)
-getLocation(-33.933, 18.474)
-
-function* test(){
-    yield 1;
-    console.log('sdda');
-    yield 2;
-    console.log('dssad');
-    return 3;
-}
-const newId= test();
-console.log(newId.next());
-newId.next();
-console.log(newId.next());
+// Phạm Hoài Nam
+// 1 tạo mảng 10 phần tử
+const list=[1,2,3,4,5,6,7,8,9,10];
+// 2
+list.splice(5,0,3,10);
+console.log(list);
+// 3
+list.splice(8,2)
+console.log(list);
+// 4 
+const arr=[1,8,3,9,2,10,15,20,6];
+// lấy ra số ở giữa
+const middleNumber=arr[Math.floor(arr.length / 2)];
+// lọc ra số lớn hơn số ở giữa
+const arr2=arr.filter(number=>number>middleNumber);
+console.log(arr2);
