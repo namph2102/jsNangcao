@@ -1,202 +1,101 @@
-// APPLICATION ARCHITECTURE
-const form = document.querySelector('.form');
-const containerWorkouts = document.querySelector('.workouts');
-const inputType = document.querySelector('.form__input--type');
-const inputDistance = document.querySelector('.form__input--distance');
-const inputDuration = document.querySelector('.form__input--duration');
-const inputCadence = document.querySelector('.form__input--cadence');
-const inputElevation = document.querySelector('.form__input--elevation');
-const workouts = document.querySelector('.workouts')
-class Workout {
-  date = Intl.DateTimeFormat('vi-VN', { day: 'numeric', year: 'numeric', month: 'numeric' }).format(Date.now());
-  id = (Date.now() + '').slice(-10);
+const HTML_LOADING = `<div class="text-center">
+<img class="loading" src="/img/loader-icon.svg" alt="" />
+</div>`;
 
-  constructor(coords, distance, duration) {
-    this.coords = coords;
-    this.distance = distance;
-    this.duration = duration;
-    this.clicks=0;
-  }
+const renderSpinner = (container) => (container.innerHTML = HTML_LOADING);
 
+const recipe = async () => {
+  const productEle = document.querySelector(".product");
+  renderSpinner(productEle);
 
-}
-class Running extends Workout {
-  type = "running";
-  constructor(coords, distance, duration, cadence) {
-    super(coords, distance, duration);
-    this.cadence = cadence;
-    this._calcPace();
-    this.des=this.type[0].toUpperCase() + this.type.slice(1) +`on ${this.date}`
-  }
-  _calcPace() {
-    this.pace = this.duration / this.distance;
-    return this.pace;
-  }
-
-}
-class Cycling extends Workout {
-  type = 'cycling';
-  constructor(coords, distance, duration, evenGain) {
-    super(coords, distance, duration);
-    this.evenGain = evenGain;
-    this._calcSpeed();
-    this.des=this.type[0].toUpperCase() + this.type.slice(1) +` on ${this.date}`
-  }
-  _calcSpeed() {
-    this.speed = this.distance / (this.duration / 60);
-    return this.speed;
-  }
-
-}
-class App {
-  #map; #mapEvent;
-  #maxZoom= 13;
-  #workout = this._getLocalStorage();
-  constructor() {
-    this._getPosition();
-    form.addEventListener('submit', this._newWork.bind(this))
-    inputType.addEventListener('change', this._toggleEventionField)
-    workouts.addEventListener('click',this._moveToPopup.bind(this))
-   
-  }
-  init(){
-    if(this.#workout?.length){
-      const html=this.#workout.map(work=>{
-        this.renderWorkout(work);
-        return this._renderview(work)
-      });
-       workouts.insertAdjacentHTML('beforeend', html)
-    }
-  };
-  _getPosition() {
-    navigator.geolocation.getCurrentPosition(this._loadMap.bind(this), (err) => console.error(err));
-
-  };
-  _loadMap(position) {
-    const { latitude: lat, longitude: log } = position.coords;
-    this.#map = L.map('map').setView([lat, log],  this.#maxZoom);
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(this.#map);
-    this.#map.on('click', this._showForm.bind(this));
-    this.init();
-    // create a red polyline from an array of LatLng points
-  }
-
-  _showForm(mapE) {
-    this.#mapEvent = mapE;
-    inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = '';
-    openForm();
-  };
-  _toggleEventionField() {
-    inputElevation.closest('.form__row').classList.toggle('form__row--hidden');
-    inputCadence.closest('.form__row').classList.toggle('form__row--hidden');
-  };
-  _newWork(e) {
-    e.preventDefault();
-
-    //get data
-    const type = inputType.value;
-    const distance = +inputDistance.value;
-    const duration = +inputDuration.value;
-    const { lat, lng } = this.#mapEvent.latlng;
-    let workout;
-    const validator = (...inputs) => {
-      return inputs.every((inputValue) => Number.isFinite(inputValue) && inputValue > 0);
-    }
-    if (type === 'running') {
-      const cadence = +inputCadence.value;
-      if (!validator(distance, duration, cadence)) {
-        return alert('Number is Valid');
-      }
-      workout = new Running([lat, lng], distance, duration, cadence)
-
-    }
-    else if (type == 'cycling') {
-      const elevation = +inputElevation.value;
-      if (!validator(distance, duration, elevation)) {
-        return alert('Number is Valid');
-      }
-      workout = new Cycling([lat, lng], distance, duration, elevation)
-    }
-    this.#workout.push(workout)
-    this.renderWorkout(workout)
-    workouts.insertAdjacentHTML('beforeend', this._renderview(workout))
-    this._setLocalStorage(this.#workout);
-    closeForm();
-  }
-  renderWorkout(workout) {
-    L.marker(workout.coords).addTo(this.#map)
-      .bindPopup(L.popup({
-        maxWidth: 250,
-        minWidth: 100,
-        autoClose: false,
-        closeOnClick: false,
-        className: `${workout.type}-popup`
-      }))
-      .setPopupContent(workout.des)
-      .openPopup();
-  }
-  _renderview(workout) {
-    const checkType = workout.type === 'running';
+  try {
+    const id = window.location.hash.slice(1);
+    const res = await fetch(
+      `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
+    );
+    const data = await res.json();
+    if (!data.status) throw new Error("Invalid Empty");
+    const { recipe } = data.data;
+    const {
+      image_url: avata,
+      ingredients,
+      publisher: name,
+      servings,
+      cooking_time: time,
+      source_url: url,
+      title,
+    } = recipe;
     const html = `
-    <li class="workout workout--${workout.type}" data-id="${workout.id}">
-<h2 class="workout__title">${workout.des}</h2>
-<div class="workout__details">
-  <span class="workout__icon">${checkType ? '🏃‍♂️' : '🚴‍♀️'}</span>
-  <span class="workout__value">${workout.distance}</span>
-  <span class="workout__unit">km</span>
+  <div class="product__avata">
+<img src=${avata} alt="${name}"/>
+  <div class="recipe__fig"></div>
+  <h1 class="recipe__title">
+    <span>V${name}</span>
+  </h1>
 </div>
-<div class="workout__details">
-  <span class="workout__icon">⏱</span>
-  <span class="workout__value">${workout.duration}</span>
-  <span class="workout__unit">min</span>
+<div class="recipe__details">
+  <div class="recipe__info">
+    <i class="fa-regular fa-clock"></i>
+    <span>${time}</span>
+    <p class="recipe__info--des">MINUTES</p>
+  </div>
+
+  <div class="recipe__info">
+    <i class="fa-solid fa-users"></i>
+    <span>${servings}</span>
+    <p class="recipe__info--des">SERVINGS</p>
+  </div>
+
+  <div class="recipe__info--btns">
+    <button><i class="fa-solid fa-minus"></i></button>
+    <button><i class="fa-solid fa-plus"></i></button>
+  </div>
+  <div class="recipe__info--bookmask">
+    <button>
+      <i class="fa-regular fa-bookmark"></i>
+    </button>
+  </div>
 </div>
-<div class="workout__details">
-  <span class="workout__icon">⚡️</span>
-  <span class="workout__value">${workout.pace?.toFixed(1) || workout.speed?.toFixed(1)}</span>
-  <span class="workout__unit">${checkType ? 'min/km' : 'km/h'}</span>
+
+<div class="recipe__des">
+  <h1 class="recipe__des--title">RECIPE INGREDIENTS</h1>
+  <ul class="recipe__ingredient-list">
+    ${ingredients
+      .map((step, i) => {
+        return `<li class="recipe__ingredient">
+      <i class="fa-solid fa-check"></i>
+      <div class="recipe__quantity">${servings} ${step.quantity ?? ""}</div>
+      <div class="recipe__description">
+        <span class="recipe__unit"></span>
+       ${step.description}
+      </div>
+    </li>`;
+      })
+      .join("")}
+  </ul>
 </div>
-<div class="workout__details">
-  <span class="workout__icon">${checkType ? '🦶🏼' : '⛰'}</span>
-  <span class="workout__value">${workout.cadence || workout.evenGain}</span>
-  <span class="workout__unit">${checkType ? 'spm' : 'm'}</span>
+
+<div class="recipe__des text-center">
+  <h1 class="recipe__des--title">${title}</h1>
+  <p class="fs-4 text-center px-5">
+    This recipe was carefully designed and tested by All Recipes.
+    Please check out directions at their website.
+  </p>
+  <a href="${url}" target="_blank" class="direction_btn">
+    DIRECTION <i class="fa-solid fa-arrow-right ps-2"></i>
+  </a>
 </div>
-</li>`
-    return html;
+ `;
+    productEle.innerHTML = html;
+  } catch (err) {
+    productEle.innerHTML = `<p class="product_not--items">
+    <i class="fa-regular fa-face-smile"></i> Start by searching for a
+    recipe or an ingredient. Have fun!
+  </p>`;
   }
-  _moveToPopup(e) {
-    const boxWorkout = e.target.closest('.workout');
-    if(!boxWorkout) return ;
-    const id = boxWorkout.dataset.id;
-    const workout = this.#workout.find(box => box.id === id);
-    this.#map.setView(workout.coords, this.#maxZoom,{anime:true,pan:{duration:1,}})
-    workout.clicks++;
-    this._getLocalStorage();
-  }
-  _setLocalStorage(){
-    localStorage.setItem('workout', JSON.stringify(this.#workout));
-  }
-  _getLocalStorage(){
-    return  JSON.parse(localStorage.getItem('workout')) || [];
-  }
-  reset(){
-    localStorage.removeItem('workout');
-    location.reload();
-  }
-}
+};
 
+// recipe("5ed6604591c37cdc054bc886");
 
-
-const app = new App();
-
-
-
-function openForm() {
-  form.classList.remove('hidden');
-}
-
-function closeForm() {
-  form.classList.add('hidden');
-}
-
+window.addEventListener("hashchange", recipe);
+window.addEventListener("load", recipe);

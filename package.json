@@ -1,0 +1,27 @@
+{
+  "name": "learnjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handle.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/namph2102/jsNangcao.git"
+  },
+  "author": "HoaiNam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/namph2102/jsNangcao/issues"
+  },
+  "homepage": "https://github.com/namph2102/jsNangcao#readme",
+  "devDependencies": {
+    "parcel": "^2.8.3"
+  },
+  "dependencies": {
+    "regenerator-runtime": "^0.13.11"
+  }
+}
