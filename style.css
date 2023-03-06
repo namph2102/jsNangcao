@@ -306,6 +306,7 @@ main section {
 }
 .direction_btn:hover {
   scale: 1.1;
+  color: #fff;
 }
 
 .product_not--items {

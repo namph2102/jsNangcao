@@ -19,9 +19,12 @@
   },
   "homepage": "https://github.com/namph2102/jsNangcao#readme",
   "devDependencies": {
+    "@babel/core": "^7.21.0",
     "parcel": "^2.8.3"
   },
   "dependencies": {
+    "core-js": "^2.5.7",
+    "fractional": "^1.0.0",
     "regenerator-runtime": "^0.13.11"
   }
 }
